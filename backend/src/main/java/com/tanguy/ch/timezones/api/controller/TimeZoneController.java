@@ -1,4 +1,4 @@
-package com.tanguy.ch.timezones.api;
+package com.tanguy.ch.timezones.api.controller;
 
 import com.tanguy.ch.timezones.api.dto.TimeZoneDto;
 import com.tanguy.ch.timezones.api.mapper.TimeZoneMapper;
