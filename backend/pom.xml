@@ -8,7 +8,7 @@
 		<version>3.3.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.tanguy.ch</groupId>
+	<groupId>com</groupId>
 	<artifactId>timezones</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>timezones</name>
