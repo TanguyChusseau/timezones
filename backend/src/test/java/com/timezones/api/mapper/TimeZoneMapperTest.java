@@ -1,5 +1,6 @@
 package com.timezones.api.mapper;
 
+import com.timezones.api.dto.PartialTimeZoneDto;
 import com.timezones.api.dto.TimeZoneDto;
 import com.timezones.domain.model.TimeZone;
 import org.junit.jupiter.api.Test;
@@ -39,10 +40,10 @@ public class TimeZoneMapperTest {
     @Test
     public void whenTimeZoneDto_thenReturnTimeZone() {
         // Given
-        TimeZoneDto timeZoneDto = new TimeZoneDto("label", "2024-04-01T02:00:00", "-05:30");
+        PartialTimeZoneDto partialTimeZoneDto = new PartialTimeZoneDto("label", "2024-04-01T02:00:00", "-05:30");
 
         // When
-        TimeZone timeZone = TimeZoneMapper.toEntity(timeZoneDto);
+        TimeZone timeZone = TimeZoneMapper.toEntity(partialTimeZoneDto);
 
         // Then
         assertEquals("label", timeZone.getLabel());

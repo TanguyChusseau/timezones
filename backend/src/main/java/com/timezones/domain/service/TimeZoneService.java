@@ -30,14 +30,20 @@ public class TimeZoneService {
 
     public void create(TimeZone timeZone) {
         this.validate(timeZone);
-        timeZone.setCreatedAt(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        timeZone.setCreatedAt(now);
+        timeZone.setUpdatedAt(now);
         timeZoneRepository.save(timeZone);
     }
 
     public void update(Long id, TimeZone timeZone) throws TimeZoneNotFoundException {
         this.validate(timeZone);
-        timeZoneRepository.findById(id).orElseThrow(() -> new TimeZoneNotFoundException(id));
-        timeZone.setUpdatedAt(LocalDateTime.now());
+        TimeZone timeZoneFromDb = timeZoneRepository.findById(id).orElseThrow(() -> new TimeZoneNotFoundException(id));
+        timeZoneFromDb.setLabel(timeZone.getLabel());
+        timeZoneFromDb.setDateTime(timeZone.getDateTime());
+        timeZoneFromDb.setOffsetFromUTC(timeZone.getOffsetFromUTC());
+        timeZoneFromDb.setUpdatedAt(LocalDateTime.now());
+        timeZoneFromDb.setCreatedAt(timeZone.getCreatedAt());
         timeZoneRepository.save(timeZone);
     }
 

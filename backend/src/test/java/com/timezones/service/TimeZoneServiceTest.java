@@ -9,6 +9,7 @@ import com.timezones.domain.model.TimeZone;
 import com.timezones.domain.service.TimeZoneService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -156,6 +157,7 @@ public class TimeZoneServiceTest {
     @Test
     public void whenCreateTimeZoneWithValidFields_thenSucceed() {
         // Given
+        ArgumentCaptor<TimeZone> timeZoneCaptor = ArgumentCaptor.forClass(TimeZone.class);
         TimeZone timeZone = new TimeZone(
                 "label",
                 LocalDateTime.of(2024, Month.JANUARY, 1, 0, 0, 0),
@@ -167,7 +169,12 @@ public class TimeZoneServiceTest {
         timeZoneService.create(timeZone);
 
         // Then
-        verify(timeZoneRepository, times(1)).save(timeZone);
+        verify(timeZoneRepository, times(1)).save(timeZoneCaptor.capture());
+        TimeZone capturedTimeZone = timeZoneCaptor.getValue();
+
+        assertEquals("label", capturedTimeZone.getLabel());
+        assertEquals(LocalDateTime.of(2024, Month.JANUARY, 1, 0, 0, 0), capturedTimeZone.getDateTime());
+        assertEquals(ZoneOffset.UTC, capturedTimeZone.getOffsetFromUTC());
     }
 
     @Test
@@ -263,11 +270,14 @@ public class TimeZoneServiceTest {
     @Test
     public void whenUpdateTimeZoneWithValidFields_thenSucceed() throws TimeZoneNotFoundException {
         // Given
+        ArgumentCaptor<TimeZone> timeZoneCaptor = ArgumentCaptor.forClass(TimeZone.class);
         Long id = 1L;
         TimeZone timeZone = new TimeZone(
                 "label",
                 LocalDateTime.of(2024, Month.JANUARY, 1, 0, 0, 0),
-                ZoneOffset.UTC
+                ZoneOffset.UTC,
+                LocalDateTime.of(2024, Month.JANUARY, 1, 0, 0, 0),
+                null
         );
         when(timeZoneRepository.findById(id)).thenReturn(Optional.of(timeZone));
         when(timeZoneRepository.save(timeZone)).thenReturn(timeZone);
@@ -277,7 +287,14 @@ public class TimeZoneServiceTest {
 
         // Then
         verify(timeZoneRepository, times(1)).findById(id);
-        verify(timeZoneRepository, times(1)).save(timeZone);
+        verify(timeZoneRepository, times(1)).save(timeZoneCaptor.capture());
+        TimeZone capturedTimeZone = timeZoneCaptor.getValue();
+
+        assertEquals("label", capturedTimeZone.getLabel());
+        assertEquals(LocalDateTime.of(2024, Month.JANUARY, 1, 0, 0, 0), capturedTimeZone.getDateTime());
+        assertEquals(ZoneOffset.UTC, capturedTimeZone.getOffsetFromUTC());
+        assertEquals(timeZone.getDateTime(), capturedTimeZone.getCreatedAt());
+        assertNotEquals(timeZone.getUpdatedAt(), capturedTimeZone.getUpdatedAt());
     }
 
     @Test

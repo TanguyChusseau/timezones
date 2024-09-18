@@ -1,5 +1,6 @@
 package com.timezones.api.mapper;
 
+import com.timezones.api.dto.PartialTimeZoneDto;
 import com.timezones.api.dto.TimeZoneDto;
 import com.timezones.domain.model.TimeZone;
 
@@ -25,13 +26,13 @@ public class TimeZoneMapper {
         return dto;
     }
 
-    public static TimeZone toEntity(TimeZoneDto timeZoneDto) {
-        TimeZoneDtoValidator.validate(timeZoneDto);
+    public static TimeZone toEntity(PartialTimeZoneDto partialTimeZoneDto) {
+        TimeZoneDtoValidator.validate(partialTimeZoneDto);
         TimeZone timeZone = new TimeZone();
 
-        timeZone.setLabel(timeZoneDto.getLabel());
-        timeZone.setDateTime(LocalDateTime.parse(timeZoneDto.getDateTime()));
-        timeZone.setOffsetFromUTC(ZoneOffset.of(timeZoneDto.getOffsetFromUTC()));
+        timeZone.setLabel(partialTimeZoneDto.getLabel());
+        timeZone.setDateTime(LocalDateTime.parse(partialTimeZoneDto.getDateTime()));
+        timeZone.setOffsetFromUTC(ZoneOffset.of(partialTimeZoneDto.getOffsetFromUTC()));
 
         return timeZone;
     }

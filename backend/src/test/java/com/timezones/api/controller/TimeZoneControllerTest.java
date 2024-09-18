@@ -213,7 +213,7 @@ public class TimeZoneControllerTest {
         long wrongTimeZoneId = timeZoneFromDbId + 1L;
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + wrongTimeZoneId)
+        mockMvc.perform(patch("/api/timezones/" + wrongTimeZoneId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isNotFound())
@@ -227,7 +227,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": null, \"dateTime\": \"2024-01-01T12:00:00\", \"offsetFromUTC\": \"+00:00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -241,7 +241,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"\", \"dateTime\": \"2024-01-01T12:00:00\", \"offsetFromUTC\": \"+00:00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -255,7 +255,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": null, \"offsetFromUTC\": \"+00:00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -269,7 +269,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": \"\", \"offsetFromUTC\": \"+00:00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -283,7 +283,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": \"2024-01-01T12:00:00\", \"offsetFromUTC\": null}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -297,7 +297,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": \"2024-01-01T12:00:00\", \"offsetFromUTC\": \"\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -311,7 +311,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": \"2024-01T12:00\", \"offsetFromUTC\": \"+00:00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -325,7 +325,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": \"2024-01-01T12:00:00\", \"offsetFromUTC\": \"00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isBadRequest())
@@ -339,7 +339,7 @@ public class TimeZoneControllerTest {
         String timeZoneToUpdate = "{\"label\": \"UTC\", \"dateTime\": \"2024-01-01T12:00:00\", \"offsetFromUTC\": \"+00:00\"}";
 
         // When and Then
-        mockMvc.perform(put("/api/timezones/" + timeZoneFromDbId)
+        mockMvc.perform(patch("/api/timezones/" + timeZoneFromDbId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(timeZoneToUpdate))
                 .andExpect(status().isNoContent());
